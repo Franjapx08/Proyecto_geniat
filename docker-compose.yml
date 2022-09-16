@@ -1,0 +1,49 @@
+version: "3.7"
+services:
+  geniat-backend:
+    build:
+      args:
+        user: frank
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: geniat-api
+    container_name: geniat-api-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - .:/var/www
+    depends_on:
+      - db
+    networks:
+      - geniat-api
+  db:
+    image: mysql:8.0
+    ports:
+      - "3307:3306"
+    container_name: geniat-api-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: geniat_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: 
+      MYSQL_USER: geniat-db
+    volumes:
+      - ./docker-compose/mysql:/var/lib/mysql
+    networks:
+      - geniat-api
+      
+  nginx:
+    image: nginx:alpine
+    container_name: geniat-api-nginx
+    restart: unless-stopped
+    ports:
+      - 9000:80
+    volumes:
+      - .:/var/www/
+      - ./docker-compose/nginx:/etc/nginx/conf.d
+    networks:
+      - geniat-api
+networks:
+  geniat-api:
+    driver: bridge
