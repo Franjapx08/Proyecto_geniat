@@ -1,6 +1,6 @@
 {
-    "name": "Proyecto_geniar",
-    "description": "Prueba para vacante desarollador backend php",
+    "name": "api/restful",
+    "description": "Api restful desarrollada en php puro con estructura mvc",
     "homepage": "https://github.com/Franjapx08/Proyecto_geniat.git",
     "author": {
         "name": "Francisco Avalos",
