@@ -14,7 +14,7 @@ services:
     volumes:
       - .:/var/www
     depends_on:
-      - db
+      - mysql
     networks:
       - geniat-api
   mysql:
