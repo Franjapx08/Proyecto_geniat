@@ -45,11 +45,12 @@ class UsuariosController{
             $token_decode = $this->modelo_auth->jwtDecode($token);
             /* guardar token al usuario */
             $usuario = $this->modelo_usuarios->updateToken($usuario[0]['id'], $token, $token_decode->exp);
+            /* retornar token */
+            return $token;
         }else{
-            $respuesta = $this->response_json::error("No se encontraron resultados", 400, "Correo o contraseña incorrectos");
+            return $this->response_json::error("No se encontraron resultados", 400, "Correo o contraseña incorrectos");
         }
         
-        return $token;
     }
 
     public function registro($nombre, $apellido, $correo, $pass, $rol){
