@@ -3,8 +3,8 @@
 require_once 'Models/Usuarios.php';
 require_once 'Models/Roles.php';
 require_once 'Models/Autenticacion.php';
-//require_once 'Models/Permisos.php';
-require_once 'Helpers/ResponseJson.php'; 
+require_once 'Helpers/ResponseJson.php';
+require_once 'Helpers/PermisosValidation.php';
 
 class UsuariosController{
 
@@ -18,8 +18,6 @@ class UsuariosController{
         $this->modelo_usuarios = new Usuarios();
         $this->modelo_roles = new Roles();
         $this->modelo_auth = new Autenticacion();
-        //test
-        //$this->modelo_permisos = new Permisos();
         $this->response_json = new ResponseJson();
         $this->regex_correo = '/^[A-z0-9\\._-]+@[A-z0-9][A-z0-9-]*(\\.[A-z0-9_-]+)*\\.([A-z]{2,6})$/';
     }
@@ -39,8 +37,13 @@ class UsuariosController{
         $usuario = $this->modelo_usuarios->login($correo, sha1($pass));
         if(count($usuario) > 0){
             $respuesta = $this->response_json::data($usuario, 200);
-            //$respuesta = $this->modelo_permisos->getPermisos($usuario[0]['id']);
+            /* creacion de token */
             $token = $this->modelo_auth->jwtEnconde($usuario[0]['id'], $usuario[0]['correo']);
+            /* evaluar permisos de acceso */
+            $permisos_validation = new PermisosValidation();
+            if(!$permisos_validation::comprobarPermisos($token, 'acceso')){
+                return $this->response_json::error("No cuenta con los permisos necesarios para acceder", 403);
+            }
             /* decodificar token */
             $token_decode = $this->modelo_auth->jwtDecode($token);
             /* guardar token al usuario */

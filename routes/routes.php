@@ -31,13 +31,6 @@ if(count($routes_array) == 1 || count($routes_array) == 2 && isset($_SERVER['REQ
         require_once 'Controllers/UsuariosController.php';
         $usuario = new UsuariosController();
         $response = $usuario->login($_POST['correo'], $_POST['password']);
-        /* Comprobar permiso tipo consulta */
-        if(!$permisos_validation::comprobarPermisos($response, 'acceso')){
-            /* ruta bloqueada por permisos */
-            $response = $responseJson::error("No cuenta con los permisos necesarios para acceder", 403);
-            echo json_encode($response);
-            return;
-        }
         echo json_encode($response);
         return;
     }

@@ -18,10 +18,12 @@ class PermisosValidation{
             /* obtener permisos */
             $modelo_permisos = new Permisos();
             $permisos = $modelo_permisos->getPermisos($usuario[0]['id']);
+            $permisos_array = [];
             foreach($permisos as $permiso){
-                if(in_array($accion, $permiso)){
-                    return true;
-                }
+                array_push($permisos_array, $permiso['permiso']);
+            }
+            if(in_array($accion, $permisos_array)){
+                return true;
             }
             return false;        
         }
