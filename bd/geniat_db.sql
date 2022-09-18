@@ -1,4 +1,3 @@
-create database geniat_db;
 use geniat_db;
 
 CREATE TABLE IF NOT EXISTS `usuarios` (

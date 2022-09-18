@@ -4,8 +4,8 @@
     docker-compose build
 # Paso 2 - Levantar contenedores
     docker-compose up -d
-# Paso 3 - Instalar dependecia composer
-    docker-compose exec {nombre_contenedor_app} composer install
+# Paso 3 - Instalar dependecias composer
+    docker-compose exec geniat-backend composer install
 # Paso 4 - Conectar a base de datos
     Con software administrador de base de datos: 
         Host: localhost
