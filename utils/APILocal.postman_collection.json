@@ -13,7 +13,48 @@
 					"name": "Registro de usuario",
 					"request": {
 						"method": "POST",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "Francisco",
+									"type": "text"
+								},
+								{
+									"key": "apellido",
+									"value": "Avalos",
+									"type": "text"
+								},
+								{
+									"key": "correo",
+									"value": "fjavpra@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "rol",
+									"value": "basico",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9000/registro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"registro"
+							]
+						}
 					},
 					"response": []
 				},
@@ -27,7 +68,7 @@
 							"formdata": [
 								{
 									"key": "correo",
-									"value": "fjavpra1@gmail.com",
+									"value": "fjavpra@gmail.com",
 									"type": "text"
 								},
 								{
@@ -147,12 +188,12 @@
 							"formdata": [
 								{
 									"key": "titulo",
-									"value": "test",
+									"value": "Titulo",
 									"type": "text"
 								},
 								{
 									"key": "descripcion",
-									"value": "descripcion test",
+									"value": "Descripcion",
 									"type": "text"
 								}
 							]
