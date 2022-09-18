@@ -40,5 +40,11 @@
         - Actualización de publicación: PUT http://localhost:9000/publicaciones/{id}
         - Eliminación de publicación: DELETE http://localhost:9000/publicaciones/{id}
 
+# Posibles errores:
+    mysql: correr los siguientes querys
+        - ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+        - ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'root';
+        - ALTER USER 'default'@'%' IDENTIFIED WITH mysql_native_password BY 'secret';
+
 
 
